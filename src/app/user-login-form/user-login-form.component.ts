@@ -11,6 +11,8 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 
+
+
 @Component({
   selector: 'app-user-login-form',
   templateUrl: './user-login-form.component.html',
@@ -37,10 +39,10 @@ export class UserLoginFormComponent implements OnInit {
       localStorage.setItem('user', result.user.Username);
       localStorage.setItem('token', result.token);
       this.dialogRef.close(); // This will close the modal on success!
-      this.router.navigate(['movies']);
-      this.snackBar.open('Logged in', 'OK', {
+      this.snackBar.open('Loggin successful', 'OK', {
         duration: 2000
       });
+      this.router.navigate(['movies']);
     }, (result) => {
       this.snackBar.open('Login failed', 'OK', {
         duration: 2000

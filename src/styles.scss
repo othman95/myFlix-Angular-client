@@ -36,4 +36,10 @@ $myFlix-Angular-client-theme: mat.define-light-theme((
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  background-color: #f0f0f0; /* Replace with your desired background color */
+  margin: 0; /* Remove default body margin */
+  font-family: 'Roboto', sans-serif; /* Ensure consistent font-family across the app */
+}
+

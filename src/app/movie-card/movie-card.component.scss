@@ -1,0 +1,11 @@
+.custom-card {
+  width: 300px; /* Adjust the width as needed */
+  margin: 8px; /* Adjust spacing between cards */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1); /* Add shadow */
+  border-radius: 2%;
+}
+
+.custom-image {
+  width: 100%; /* Full width within the card */
+  height: 450px; /* Maintain aspect ratio */
+}
