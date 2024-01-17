@@ -48,7 +48,7 @@ export class FetchApiDataService {
   }
 
   // Get one movie
-  getMovie(movieId: string): Observable<any> {
+  getOneMovie(movieId: string): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http.get(apiUrl +'movies/'+ movieId, {
       headers: new HttpHeaders({
@@ -59,6 +59,19 @@ export class FetchApiDataService {
       catchError(this.handleError)
       );
   }
+
+    // Get one user
+    getOneUser(userId: string): Observable<any> {
+      const token = localStorage.getItem('token');
+      return this.http.get(apiUrl +'users/'+ userId, {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+        })
+      }).pipe(
+        map (this.extractResponseData),
+        catchError(this.handleError)
+        );
+    }
 
   // Get director
   getDirector(directorName: string): Observable<any> {

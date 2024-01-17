@@ -1,6 +1,8 @@
+<app-navbar></app-navbar>
+
 <div style="display: flex; justify-content: center; flex-wrap: wrap">
   <mat-card *ngFor="let movie of movies" class="custom-card">
-    <mat-card-header>
+    <mat-card-header style="color: SteelBlue">
       <mat-card-title>{{ movie.Title }}</mat-card-title>
       <mat-card-subtitle>
         Directed by: {{ movie.Director.Name }}
@@ -12,10 +14,33 @@
       class="custom-image"
     />
     <mat-card-actions>
-      <button mat-button color="primary">Genre</button>
-      <button mat-button color="primary">Director</button>
-      <button mat-button color="primary">Synopsis</button>
-      <mat-icon>favorite_border</mat-icon>
+      <button mat-button color="primary" (click)="openGenreInfo(movie.Genres)">
+        Genre
+      </button>
+      <button
+        mat-button
+        color="primary"
+        (click)="openDirectorInfo(movie.Director)"
+      >
+        Director
+      </button>
+
+      <button mat-button color="primary" (click)="openSynopsis(movie)">
+        Synopsis
+      </button>
+      <button
+        mat-icon-button
+        aria-label="Example icon-button with heart icon"
+        [ngClass]="
+          isFavoriteMovie(movie._id) ? 'mat-flat-button' : 'mat-icon-button'
+        "
+        (click)="addToFavorites(movie._id)"
+        [color]="isFavoriteMovie(movie._id) ? 'accent' : 'warn'"
+      >
+        <mat-icon>{{
+          isFavoriteMovie(movie._id) ? "favorite" : "favorite_border"
+        }}</mat-icon>
+      </button>
     </mat-card-actions>
   </mat-card>
 </div>
