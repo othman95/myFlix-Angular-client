@@ -35,6 +35,14 @@ Using Angular, build the client-side for an app called myFlix based on its exist
 - Typescript
 - typedoc
 
+### Screenshots
+<p align="center">
+<img src="https://github.com/MSIlam/myFlix-Angular-client/assets/43422503/a57ddf63-5737-49cb-a09e-a16ec57aa341" alt="meet Screenshot 1" width="405" style="margin-right: 20px;">
+<img src="https://github.com/MSIlam/myFlix-Angular-client/assets/43422503/937ba37e-faec-49a3-b95b-3c985471b2fa" alt="Chat Screenshot 3" width="400">
+<img src="https://github.com/MSIlam/myFlix-Angular-client/assets/43422503/85cd12a2-1121-4f5f-b74e-3947b825a570" alt="Chat Screenshot 2" width="400" style="margin-right: 20px;">
+<img src="https://github.com/MSIlam/myFlix-Angular-client/assets/43422503/78bfbc48-9db1-4ca9-9d01-8207ded422bc" alt="Chat Screenshot 2" width="150" style="margin-right: 20px;">
+
+
 ### Server
 - gh-pages
 #### The app can be visited at
