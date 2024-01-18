@@ -16,7 +16,6 @@ import {
 })
 export class MovieCardComponent implements OnInit {
   @Input() movie: any;  // Input property to receive movie data
-  @Output() addToFavoritesEvent = new EventEmitter<string>();
   movies: any[] = [];
   favorites: any[] = [];
   userId: string = '';
@@ -82,8 +81,8 @@ openGenreInfo(Genres:any): void {
 getFavorites(): void {
   this.fetchApiData.getOneUser(this.userId).subscribe(
     (resp: any) => {
-      if (resp.user && resp.user.FavouriteMovies) {
-        this.favorites = resp.user.FavouriteMovies;
+      if (resp.FavouriteMovies) {
+        this.favorites = resp.FavouriteMovies;
       } else {
         this.favorites = [];
       }
@@ -95,25 +94,6 @@ getFavorites(): void {
   );
 }
 
-// getFavorites(): void {
-//   if (this.userId) {
-//     this.fetchApiData.getOneUser(this.userId).subscribe(
-//       (resp: any) => {
-//         if (resp.user && resp.user.FavouriteMovies) {
-//           this.favorites = resp.user.FavouriteMovies;
-//         } else {
-//           this.favorites = [];
-//         }
-//       },
-//       (error: any) => {
-//         console.error('Error fetching user data:', error);
-//         this.favorites = [];
-//       }
-//     );
-//   } else {
-//     console.error('User ID is undefined or null');
-//   }
-// }
 
 
 isFavoriteMovie(movieId: string): boolean {
@@ -121,7 +101,13 @@ isFavoriteMovie(movieId: string): boolean {
 }
 
 addToFavorites(movieId: string): void {
-  this.addToFavoritesEvent.emit(movieId);
+  // Api call to add movie to favorites /users/:id/movies/:MovieId
+  this.favorites.push(movieId);
+  this.fetchApiData.addFavoriteMovie(this.userId, movieId).subscribe(() => {
+    this.snackBar.open('Add to favorites', 'OK', {
+      duration: 2000,
+    });
+  });
 }
 
 

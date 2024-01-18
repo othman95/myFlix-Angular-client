@@ -99,14 +99,6 @@ export class FetchApiDataService {
       );
   }
 
-  // Get favourite movies for a user
-  // getFavoriteMovies(userId: string): Observable<any> {
-  //   return this.http.get(apiUrl+ 'users/userId/movies').pipe(
-  //     map (this.extractResponseData),
-  //     catchError(this.handleError)
-  //     );
-  // }
-
   // Add a movie to favourite Movies
   addFavoriteMovie(userId: string, movieId: string): Observable<any> {
     const token = localStorage.getItem('token');

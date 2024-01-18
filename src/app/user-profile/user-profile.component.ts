@@ -21,7 +21,6 @@ constructor(
     public router: Router) {}
 
     ngOnInit(): void {
-      console.log('UserProfileComponent ngOnInit called');
       this.getUser();
     }
 
@@ -37,6 +36,7 @@ constructor(
       if (userId) {
         this.fetchApiData.getOneUser(userId).subscribe((user) => {
           this.user = user;
+          this.userData = user;
           
           this.fetchApiData.getAllMovies().subscribe((response: any) => {
             this.FavouriteMovies = response.filter((movie: any) => this.user.FavouriteMovies.includes(movie._id));
@@ -55,6 +55,7 @@ constructor(
       console.log(result);
       localStorage.setItem('user', JSON.stringify(result));
       this.user= result;
+    
       this.snackBar.open('Your profile has been updated', 'OK',{
         duration: 3000
       });
@@ -80,6 +81,7 @@ constructor(
     }
   }
 
+
   addToFavorites(movieId: string): void {
     console.log('userId:', this.user._id);
   console.log('movieId:', movieId);
@@ -97,14 +99,24 @@ constructor(
     );
   }
 
-
-  public removeFavoriteMovie(favMovie: string): void {
-    this.fetchApiData.deleteFavoriteMovie(this.user._id,favMovie).subscribe(() => {
-      this.FavouriteMovies = this.FavouriteMovies.filter((movie: any) => {
-        return movie.movieId !== favMovie;
-      });
-    });
+  public removeFavoriteMovie(movieId: string): void {
+    this.fetchApiData.deleteFavoriteMovie(this.user._id, movieId).subscribe(
+      () => {
+        // Remove the movie from the local array
+        this.FavouriteMovies = this.FavouriteMovies.filter(
+          (movie) => movie._id !== movieId
+        );
+  
+        this.snackBar.open('Removed from favorites', 'OK', {
+          duration: 2000,
+        });
+      },
+      (error) => {
+        console.error('Error removing movie from favorites:', error);
+      }
+    );
   }
+  
   
   }
 

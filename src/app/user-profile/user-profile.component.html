@@ -9,12 +9,14 @@
           Username: <b>{{ userData.Username }}</b>
         </p>
         <p>
-          Birthday: <b>{{ userData.Birthday }}</b>
+          Birthday: <b>{{ userData.Birthday | date : "MM/dd/yyyy" }}</b>
         </p>
         <p>
           Email: <b>{{ userData.Email }}</b>
         </p>
         <form>
+          <hr class="separator" />
+
           <h1>Update Profile</h1>
 
           <mat-form-field class="user">
@@ -34,6 +36,7 @@
               [(ngModel)]="userData.Password"
               type="password"
               name="password"
+              autocomplete="new-password"
               required
             />
           </mat-form-field>
@@ -85,27 +88,85 @@
       </div>
     </div>
   </div>
+  <hr class="separator" />
+
   <h2>Favorite Movies</h2>
   <div *ngIf="FavouriteMovies.length === 0">
     <p>No favorites.</p>
   </div>
-  <mat-list>
-    <mat-list-item *ngFor="let movie of FavouriteMovies">
-      <!-- Display movie details here -->
-      <img matListItemAvatar src="{{ movie.imageURL }}" />
-      <span matListItemTitle>{{ movie.Title }}</span>
-    </mat-list-item>
-  </mat-list>
+
+  <div style="display: flex; justify-content: center; flex-wrap: wrap">
+    <mat-card *ngFor="let movie of FavouriteMovies" class="custom-card">
+      <mat-card-header style="color: SteelBlue">
+        <mat-card-title>{{ movie.Title }}</mat-card-title>
+        <mat-card-subtitle>
+          Directed by: {{ movie.Director.Name }}
+        </mat-card-subtitle>
+      </mat-card-header>
+      <img
+        src="{{ movie.ImageURL }}"
+        alt="{{ movie.Title }}"
+        class="custom-image"
+      />
+      <mat-card-actions>
+        <button
+          mat-raised-button
+          color="accent"
+          (click)="removeFavoriteMovie(movie._id)"
+        >
+          Remove
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 </div>
 
-<!-- 
-      <mat-list>
-        <mat-list-item *ngFor="let movie of favorite_movies">
-          <img matListItemAvatar src="{{ movie.imageURL }}" />
-          <span matListItemTitle>{{ movie.Title }}</span>
-        </mat-list-item>
-      </mat-list>
-    </div> -]
-
-        <!-- <mat-card>
-        <mat-card-content>     -->
+<!-- <div class="movie-list">
+    <mat-card class="movie-card" *ngFor="let movie of FavouriteMovies">
+      <mat-card-header class="movie-title">
+        <mat-card-title>{{ movie.Title }}</mat-card-title>
+        <mat-card-subtitle
+          >Directed by: {{ movie.Director.Name }}</mat-card-subtitle
+        >
+      </mat-card-header>
+      <img
+        class="movie-image"
+        src="{{ movie.imageURL }}"
+        alt="{{ movie.Title }}"
+      />
+    </mat-card>
+  </div> -->
+<!-- <mat-card-actions>
+        <button mat-button color="primary" (click)="openGenreInfo(movie.Genres)">
+          Genre
+        </button>
+        <button
+          mat-button
+          color="primary"
+          (click)="openDirectorInfo(movie.Director)"
+        >
+          Director
+        </button>
+  
+        <button mat-button color="primary" (click)="openSynopsis(movie)">
+          Synopsis
+        </button> -->
+<!-- <mat-card-actions>
+        <button
+          mat-icon-button
+          aria-label="Example icon-button with heart icon"
+          [ngClass]="
+            isFavoriteMovie(movie._id) ? 'mat-flat-button' : 'mat-icon-button'
+          "
+          (click)="
+            isFavoriteMovie(movie._id)
+              ? removeFavoriteMovie(movie._id)
+              : addToFavorites(movie._id)
+          "
+          [color]="isFavoriteMovie(movie._id) ? 'accent' : 'warn'"
+        >
+          <mat-icon>{{
+            isFavoriteMovie(movie._id) ? "favorite" : "favorite_border"
+          }}</mat-icon>
+        </button> -->
+<!-- </mat-card-actions> -->
