@@ -120,22 +120,3 @@ removeFavoriteMovie(movieId: string): void {
   });
 }
 }
-
-// addToFavorites(movieId: string): void {
-//   if (this.isFavoriteMovie(movieId)) {
-//     this.removeFavoriteMovie(movieId);
-//   } else {
-//     this.favorites.push(movieId);
-//     this.fetchApiData.addFavoriteMovie(this.userId, movieId).subscribe(
-//       () => {
-//         this.snackBar.open('Movie added to favorites', 'OK', {
-//           duration: 2000,
-//         });
-//       },
-//       (error) => {
-//         this.favorites = this.favorites.filter((id) => id !== movieId);
-//         console.error('Error adding movie to favorites:', error);
-//       }
-//     );
-//   }
-// }
